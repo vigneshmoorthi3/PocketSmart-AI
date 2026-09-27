@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Jewelry Budget Planner - PocketSmart</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    }
+
+    body {
+      background-color: #f1f5f9;
+      color: #1e293b;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+
+    .navbar {
+      background: #0b1e36;
+      padding: 15px 40px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .navbar-brand {
+      font-size: 20px;
+      font-weight: 700;
+      color: #ffffff;
+      text-decoration: none;
+    }
+
+    .navbar-nav {
+      display: flex;
+      gap: 20px;
+      align-items: center;
+    }
+
+    .navbar-nav a, .logout-btn {
+      color: #cbd5e1;
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 500;
+      background: none;
+      border: none;
+      cursor: pointer;
+    }
+
+    .navbar-nav a.active {
+      color: #f59e0b;
+      font-weight: 600;
+    }
+
+    .hero-banner {
+      background: linear-gradient(180deg, #102a4e 0%, #1e407a 100%);
+      color: #ffffff;
+      text-align: center;
+      padding: 40px 20px;
+    }
+
+    .hero-banner h1 {
+      font-size: 32px;
+      font-weight: 800;
+      margin-bottom: 8px;
+    }
+
+    .hero-banner p {
+      font-size: 14px;
+      color: #cbd5e1;
+    }
+
+    .main-card {
+      max-width: 820px;
+      width: 100%;
+      margin: 35px auto;
+      background: #ffffff;
+      border-radius: 14px;
+      padding: 30px;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06);
+      flex: 1;
+    }
+
+    .section-box {
+      background: #f8fafc;
+      border: 1px solid #e2e8f0;
+      border-radius: 10px;
+      padding: 20px;
+      margin-bottom: 20px;
+    }
+
+    .section-title {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 15px;
+      font-weight: 700;
+      color: #1e3a8a;
+      border-bottom: 2px solid #2563eb;
+      padding-bottom: 6px;
+      margin-bottom: 16px;
+    }
+
+    label {
+      display: block;
+      font-size: 12px;
+      font-weight: 600;
+      color: #334155;
+      margin-bottom: 6px;
+    }
+
+    input[type="number"], input[type="text"], textarea {
+      width: 100%;
+      padding: 10px 12px;
+      border: 1px solid #cbd5e1;
+      border-radius: 6px;
+      font-size: 13px;
+      background: #ffffff;
+      outline: none;
+    }
+
+    .upload-area {
+      background: #ffffff;
+      border: 1px solid #cbd5e1;
+      border-radius: 8px;
+      padding: 20px;
+      text-align: center;
+    }
+
+    .preview-wrap {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 16px;
+      margin-top: 12px;
+    }
+
+    .preview-wrap img {
+      max-height: 180px;
+      border-radius: 8px;
+      border: 1px solid #e2e8f0;
+    }
+
+    .btn-remove {
+      background: #64748b;
+      color: #ffffff;
+      border: none;
+      padding: 6px 12px;
+      border-radius: 6px;
+      font-size: 12px;
+      cursor: pointer;
+    }
+
+    .btn-generate-wrap {
+      text-align: center;
+      margin: 24px 0 10px;
+    }
+
+    .btn-generate {
+      background: linear-gradient(90deg, #2563eb 0%, #0f2744 100%);
+      color: #ffffff;
+      border: none;
+      padding: 13px 36px;
+      border-radius: 25px;
+      font-size: 15px;
+      font-weight: 600;
+      cursor: pointer;
+    }
+
+    .results-area {
+      display: none;
+      margin-top: 30px;
+    }
+
+    .summary-card {
+      border: 1px solid #e2e8f0;
+      border-radius: 10px;
+      overflow: hidden;
+      margin-bottom: 20px;
+    }
+
+    .summary-header {
+      background: linear-gradient(90deg, #1e407a 0%, #0b1e36 100%);
+      color: #ffffff;
+      padding: 12px 20px;
+      font-weight: 700;
+      font-size: 15px;
+    }
+
+    .summary-body {
+      background: #ffffff;
+      padding: 15px 20px;
+      display: flex;
+      justify-content: space-between;
+      font-size: 13px;
+      font-weight: 700;
+    }
+
+    .analysis-bar {
+      background: #e2e8f0;
+      padding: 12px 20px;
+      border-radius: 8px;
+      display: flex;
+      justify-content: space-around;
+      font-size: 12px;
+      margin-top: 10px;
+    }
+
+    .jewel-item {
+      border-left: 3px solid #2563eb;
+      padding: 14px 18px;
+      margin-bottom: 18px;
+      background: #ffffff;
+      position: relative;
+      border-bottom: 1px solid #f1f5f9;
+    }
+
+    .price-pill {
+      position: absolute;
+      right: 18px;
+      top: 14px;
+      background: #2563eb;
+      color: #ffffff;
+      padding: 4px 10px;
+      border-radius: 6px;
+      font-size: 12px;
+      font-weight: 700;
+    }
+
+    .shop-pills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-top: 8px;
+    }
+
+    .shop-pill {
+      padding: 4px 10px;
+      border: 1px solid #cbd5e1;
+      border-radius: 14px;
+      font-size: 11px;
+      color: #1e3a8a;
+      text-decoration: none;
+      background: #f8fafc;
+    }
+
+    footer {
+      background: #0b1e36;
+      color: #cbd5e1;
+      text-align: center;
+      padding: 18px;
+      font-size: 12px;
+      margin-top: auto;
+    }
+  </style>
+</head>
+<body>
+
+  <header class="navbar">
+    <a href="/dashboard" class="navbar-brand">📁 PocketSmart</a>
+    <div class="navbar-nav">
+      <a href="/dashboard">📈 Dashboard</a>
+      <a href="/home-planner">🏠 Home Budget</a>
+      <a href="/party-planner">🎉 Party Budget</a>
+      <a href="/jewelry-planner" class="active">💎 Jewelry Budget</a>
+      <a href="/history">🕒 History</a>
+      <form action="/logout" method="post" style="display:inline;">
+        <button type="submit" class="logout-btn">↪ Logout</button>
+      </form>
+    </div>
+  </header>
+
+  <section class="hero-banner">
+    <h1>Jewelry Budget Planner</h1>
+    <p>Get AI-powered jewelry recommendations within your budget for any occasion</p>
+  </section>
+
+  <main class="main-card">
+    <div class="section-box">
+      <div class="section-title">💲 Budget Details</div>
+      <label>Total Budget ($ / ₹)</label>
+      <input type="number" id="j_budget" value="5000">
+    </div>
+
+    <div class="section-box">
+      <div class="section-title">📅 Occasion & Preferences</div>
+      <div style="margin-bottom: 14px;">
+        <label>🥂 Occasion</label>
+        <input type="text" id="j_occ" value="Birthday">
+      </div>
+      <div>
+        <label>💙 Style Preferences</label>
+        <textarea id="j_pref" rows="3" placeholder="Describe your style preferences, materials, colors, etc."></textarea>
+      </div>
+    </div>
+
+    <div class="section-box">
+      <div class="section-title">👕 Upload Outfit Image</div>
+      <div class="upload-area">
+        <input type="file" id="j_img" accept="image/*" onchange="previewOutfit(event)">
+        <div id="preview-box" class="preview-wrap"></div>
+      </div>
+    </div>
+
+    <div class="btn-generate-wrap">
+      <button class="btn-generate" onclick="generateJewelryPlan()">🪄 Get Recommendations</button>
+    </div>
+
+    <div id="loader" style="display:none; text-align:center; padding:20px; font-weight:600; color:#1e3a8a;">Analyzing outfit & generating jewelry suggestions...</div>
+
+    <div id="results-area" class="results-area">
+      <h2 style="text-align:center; font-size:20px; margin-bottom:18px;">Your Personalized Jewelry Recommendations</h2>
+
+      <div class="summary-card">
+        <div class="summary-header">🕒 Budget Summary</div>
+        <div class="summary-body">
+          <span>Total Budget: <span id="j-tot" style="color:#2563eb;">$5000.00</span></span>
+          <span>Remaining Budget: <span id="j-rem" style="color:#16a34a;">$800.00</span></span>
+        </div>
+      </div>
+
+      <div class="section-box" style="background:#ffffff;">
+        <h4 style="color:#1e3a8a; font-size:14px; margin-bottom:8px;">👕 Outfit Analysis</h4>
+        <div class="analysis-bar">
+          <span>🎨 <strong>Colors:</strong> blue, white</span>
+          <span>🏷 <strong>Style:</strong> casual</span>
+          <span>🎗 <strong>Formality:</strong> informal</span>
+        </div>
+      </div>
+
+      <div class="summary-card">
+        <div class="summary-header">💎 Jewelry Recommendations</div>
+        <div style="padding: 18px; background:#ffffff;" id="jewel-items-box"></div>
+      </div>
+
+      <div class="summary-card">
+        <div class="summary-header" style="background:#2563eb;">💡 Styling Tips</div>
+        <div style="padding:16px 20px; background:#fefce8; font-size:12px; line-height:1.8; color:#334155;">
+          <p>✔ Keep the jewelry minimal to match the style of the outfit.</p>
+          <p>✔ Consider the watch as a statement piece, choosing a design that reflects personal style.</p>
+          <p>✔ Ensure the metal tones of the ring and bracelet complement each other.</p>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    &copy; 2026 PocketSmart | Smart Budget Solutions
+  </footer>
+
+  <script>
+    function previewOutfit(event) {
+      const file = event.target.files[0];
+      if (file) {
+        const reader = new FileReader();
+        reader.onload = function(e) {
+          document.getElementById('preview-box').innerHTML = `
+            <img src="${e.target.result}" alt="Outfit Preview">
+            <button type="button" class="btn-remove" onclick="clearImage()">🗑 Remove Image</button>
+          `;
+        };
+        reader.readAsDataURL(file);
+      }
+    }
+
+    function clearImage() {
+      document.getElementById('j_img').value = '';
+      document.getElementById('preview-box').innerHTML = '';
+    }
+
+    async function generateJewelryPlan() {
+      const budget = parseFloat(document.getElementById('j_budget').value || 5000);
+      const occ = document.getElementById('j_occ').value || 'Birthday';
+      const pref = document.getElementById('j_pref').value || 'Casual';
+
+      document.getElementById('loader').style.display = 'block';
+      document.getElementById('results-area').style.display = 'none';
+
+      const fd = new FormData();
+      fd.append('total_budget', budget);
+      fd.append('occasion', occ);
+      fd.append('preferences', pref);
+      const imgFile = document.getElementById('j_img').files[0];
+      if (imgFile) fd.append('image', imgFile);
+
+      let aiList = [];
+      try {
+        const res = await fetch('/generate-jewelry', { method: 'POST', body: fd });
+        const data = await res.json();
+        aiList = data.jewelry_recommendations || [];
+      } catch (e) {
+        console.error(e);
+      }
+
+      document.getElementById('loader').style.display = 'none';
+      document.getElementById('results-area').style.display = 'block';
+      document.getElementById('j-tot').innerText = '$' + budget.toFixed(2);
+      document.getElementById('j-rem').innerText = '$' + (budget * 0.16).toFixed(2);
+
+      const defaultItems = [
+        { item_name: 'bracelet', desc: 'A simple, braided leather bracelet with metal accents. Complements the outfit without being overly flashy.', price: (budget * 0.1).toFixed(2), style: 'casual' },
+        { item_name: 'ring', desc: 'A silver or dark grey metal ring with a minimalist design to maintain a balanced feel.', price: (budget * 0.14).toFixed(2), style: 'minimalist' },
+        { item_name: 'watch', desc: 'A classic, simple watch with a leather or metal band that complements the outfit colors.', price: (budget * 0.6).toFixed(2), style: 'classic' }
+      ];
+
+      const renderList = aiList.length > 0 ? aiList.map(i => ({
+        item_name: i.item_name || 'Jewelry Piece',
+        desc: i.description || i.search_terms || 'Elegant piece matching your occasion.',
+        price: i.estimated_price || 500,
+        style: pref
+      })) : defaultItems;
+
+      const shopLinksHtml = (q) => {
+        const enc = encodeURIComponent(q);
+        return `
+          <div class="shop-pills">
+            <a class="shop-pill" href="https://www.amazon.in/s?k=${enc}" target="_blank">Amazon</a>
+            <a class="shop-pill" href="https://www.flipkart.com/search?q=${enc}" target="_blank">Flipkart</a>
+            <a class="shop-pill" href="https://www.bluestone.com/jewellery.html?q=${enc}" target="_blank">Bluestone</a>
+            <a class="shop-pill" href="https://www.tanishq.co.in/search?q=${enc}" target="_blank">Tanishq</a>
+            <a class="shop-pill" href="https://www.caratlane.com/search?q=${enc}" target="_blank">Caratlane</a>
+            <a class="shop-pill" href="https://www.melorra.com/search?q=${enc}" target="_blank">Melorra</a>
+            <a class="shop-pill" href="https://www.meesho.com/search?q=${enc}" target="_blank">Meesho</a>
+          </div>
+        `;
+      };
+
+      document.getElementById('jewel-items-box').innerHTML = renderList.map(item => `
+        <div class="jewel-item">
+          <span class="price-pill">$${item.price}</span>
+          <h4 style="font-size:15px; color:#0f172a; margin-bottom:6px;">🔵 ${item.item_name}</h4>
+          <p style="font-size:12px; color:#475569; margin-bottom:6px; max-width:80%;"><strong>Description:</strong> ${item.desc}</p>
+          <p style="font-size:12px; color:#475569; margin-bottom:8px;"><strong>Style:</strong> ${item.style}</p>
+          <div style="font-size:11px; font-weight:700;">🛒 Shop For This:</div>
+          ${shopLinksHtml(item.item_name)}
+        </div>
+      `).join('');
+    }
+  </script>
+
+</body>
+</html>

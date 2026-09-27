@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard - PocketSmart</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    }
+
+    body {
+      background-color: #eef2f6;
+      color: #1e293b;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+
+    .navbar {
+      background: #0b1e36;
+      padding: 15px 40px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .navbar-brand {
+      font-size: 20px;
+      font-weight: 700;
+      color: #ffffff;
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .navbar-nav {
+      display: flex;
+      gap: 22px;
+      align-items: center;
+    }
+
+    .navbar-nav a, .logout-btn {
+      color: #cbd5e1;
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 500;
+      background: none;
+      border: none;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: color 0.2s;
+    }
+
+    .navbar-nav a:hover, .logout-btn:hover {
+      color: #ffffff;
+    }
+
+    .hero-banner {
+      background: linear-gradient(180deg, #102a4e 0%, #1e407a 100%);
+      color: #ffffff;
+      text-align: center;
+      padding: 50px 20px;
+    }
+
+    .hero-banner h1 {
+      font-size: 36px;
+      font-weight: 800;
+      margin-bottom: 12px;
+    }
+
+    .hero-banner p {
+      font-size: 15px;
+      color: #cbd5e1;
+      max-width: 600px;
+      margin: 0 auto;
+      line-height: 1.5;
+    }
+
+    .container {
+      max-width: 1080px;
+      margin: 40px auto;
+      padding: 0 20px;
+      flex: 1;
+      width: 100%;
+    }
+
+    .planner-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 28px;
+    }
+
+    .planner-card {
+      background: #ffffff;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.06);
+      display: flex;
+      flex-direction: column;
+      border: 1px solid #e2e8f0;
+    }
+
+    .planner-card img {
+      width: 100%;
+      height: 195px;
+      object-fit: cover;
+    }
+
+    .planner-card-body {
+      padding: 24px;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .planner-card h3 {
+      font-size: 18px;
+      font-weight: 700;
+      color: #1e3a8a;
+      margin-bottom: 10px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .planner-card p {
+      font-size: 13px;
+      color: #64748b;
+      line-height: 1.6;
+      margin-bottom: 24px;
+    }
+
+    .btn-card {
+      background: linear-gradient(90deg, #2563eb 0%, #0f2744 100%);
+      color: #ffffff;
+      text-align: center;
+      padding: 12px;
+      border-radius: 25px;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 14px;
+      display: block;
+      transition: opacity 0.2s;
+    }
+
+    .btn-card:hover {
+      opacity: 0.92;
+    }
+
+    .history-btn-wrap {
+      text-align: center;
+      margin: 35px 0;
+    }
+
+    .btn-orange-pill {
+      background: #f59e0b;
+      color: #ffffff;
+      padding: 12px 28px;
+      border-radius: 25px;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 14px;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      box-shadow: 0 4px 12px rgba(245, 158, 11, 0.3);
+      transition: background 0.2s;
+    }
+
+    .btn-orange-pill:hover {
+      background: #d97706;
+    }
+
+    .recent-box {
+      background: #ffffff;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.06);
+      border: 1px solid #e2e8f0;
+      max-width: 900px;
+      margin: 0 auto 30px;
+    }
+
+    .recent-header {
+      background: linear-gradient(90deg, #1e407a 0%, #0b1e36 100%);
+      color: #ffffff;
+      padding: 16px 24px;
+      font-size: 16px;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .recent-list {
+      padding: 10px 24px;
+    }
+
+    .recent-item {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      padding: 16px 0;
+      border-bottom: 1px solid #f1f5f9;
+    }
+
+    .recent-item:last-child {
+      border-bottom: none;
+    }
+
+    .recent-icon {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: #1e3a8a;
+      color: #ffffff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 16px;
+      flex-shrink: 0;
+    }
+
+    .recent-info h4 {
+      font-size: 14px;
+      font-weight: 700;
+      color: #0f172a;
+      margin-bottom: 4px;
+    }
+
+    .recent-info p {
+      font-size: 12px;
+      color: #64748b;
+    }
+
+    footer {
+      background: #0b1e36;
+      color: #cbd5e1;
+      text-align: center;
+      padding: 20px;
+      font-size: 12px;
+      margin-top: auto;
+    }
+  </style>
+</head>
+<body>
+
+  <header class="navbar">
+    <a href="/dashboard" class="navbar-brand">📁 PocketSmart</a>
+    <div class="navbar-nav">
+      <a href="/home-planner">🏠 Home Planner</a>
+      <a href="/party-planner">🎉 Party Planner</a>
+      <a href="/jewelry-planner">💎 Jewelry Planner</a>
+      <a href="/history">🕒 History</a>
+      <form action="/logout" method="post" style="display:inline;">
+        <button type="submit" class="logout-btn">↪ Logout</button>
+      </form>
+    </div>
+  </header>
+
+  <section class="hero-banner">
+    <h1>Welcome, {{ user.username }}!</h1>
+    <p>Choose a budget planner to get started with your personalized financial planning experience</p>
+  </section>
+
+  <main class="container">
+    <div class="planner-grid">
+      <div class="planner-card">
+        <img src="https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?w=600" alt="Home Planner">
+        <div class="planner-card-body">
+          <div>
+            <h3>🏠 Home Budget Planner</h3>
+            <p>Plan your interior design budget efficiently with AI-powered recommendations for furniture, lighting, and more.</p>
+          </div>
+          <a href="/home-planner" class="btn-card">Get Started</a>
+        </div>
+      </div>
+
+      <div class="planner-card">
+        <img src="https://images.unsplash.com/photo-1513151233558-d860c5398176?w=600" alt="Party Planner">
+        <div class="planner-card-body">
+          <div>
+            <h3>🎉 Party Budget Planner</h3>
+            <p>Plan your perfect event with budget allocations for venue, catering, decorations, and entertainment.</p>
+          </div>
+          <a href="/party-planner" class="btn-card">Get Started</a>
+        </div>
+      </div>
+
+      <div class="planner-card">
+        <img src="https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?w=600" alt="Jewelry Planner">
+        <div class="planner-card-body">
+          <div>
+            <h3>💎 Jewelry Budget Planner</h3>
+            <p>Find the ideal jewelry pieces for any occasion that match your outfit and stay within your budget.</p>
+          </div>
+          <a href="/jewelry-planner" class="btn-card">Get Started</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="history-btn-wrap">
+      <a href="/history" class="btn-orange-pill">🕒 View All Recommendation History</a>
+    </div>
+
+    <div class="recent-box">
+      <div class="recent-header">
+        <span>🕒 Recent Activity</span>
+      </div>
+      <div class="recent-list" id="recent-activity-list">
+        <div class="recent-item">
+          <div class="recent-icon">🏠</div>
+          <div class="recent-info">
+            <h4>Home Budget Plan</h4>
+            <p>Budget: ₹5,000 - Personalized interior setup</p>
+          </div>
+        </div>
+        <div class="recent-item">
+          <div class="recent-icon">🎉</div>
+          <div class="recent-info">
+            <h4>Birthday Party Budget Plan</h4>
+            <p>Budget: ₹12,000 for 30 guests</p>
+          </div>
+        </div>
+        <div class="recent-item">
+          <div class="recent-icon">💎</div>
+          <div class="recent-info">
+            <h4>Jewelry Budget Plan</h4>
+            <p>Budget: ₹8,000 for Anniversary</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    &copy; 2026 PocketSmart. All rights reserved.
+  </footer>
+
+  <script>
+    async function loadRecentActivity() {
+      try {
+        const res = await fetch('/recommendation-history');
+        if (!res.ok) return;
+        const data = await res.json();
+        const list = document.getElementById('recent-activity-list');
+        if (data.history && data.history.length > 0) {
+          list.innerHTML = data.history.slice(0, 4).map(item => {
+            const icon = item.type === 'home' ? '🏠' : (item.type === 'party' ? '🎉' : '💎');
+            const title = item.type.charAt(0).toUpperCase() + item.type.slice(1) + ' Budget Plan';
+            const budget = item.input && item.input.total_budget ? item.input.total_budget : '5000';
+            const dateStr = new Date(item.timestamp).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+            return `
+              <div class="recent-item">
+                <div class="recent-icon">${icon}</div>
+                <div class="recent-info">
+                  <h4>${title}</h4>
+                  <p>Budget: ₹${budget} - Created on ${dateStr}</p>
+                </div>
+              </div>
+            `;
+          }).join('');
+        }
+      } catch (e) {
+        console.error(e);
+      }
+    }
+    loadRecentActivity();
+  </script>
+
+</body>
+</html>

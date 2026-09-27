@@ -1,0 +1,564 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Home Interior Budget Planner - PocketSmart</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    }
+
+    body {
+      background-color: #f1f5f9;
+      color: #1e293b;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+
+    .navbar {
+      background: #0b1e36;
+      padding: 15px 40px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .navbar-brand {
+      font-size: 20px;
+      font-weight: 700;
+      color: #ffffff;
+      text-decoration: none;
+    }
+
+    .navbar-nav {
+      display: flex;
+      gap: 20px;
+      align-items: center;
+    }
+
+    .navbar-nav a, .logout-btn {
+      color: #cbd5e1;
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 500;
+      background: none;
+      border: none;
+      cursor: pointer;
+    }
+
+    .navbar-nav a.active {
+      color: #f59e0b;
+      font-weight: 600;
+    }
+
+    .hero-banner {
+      background: linear-gradient(180deg, #102a4e 0%, #1e407a 100%);
+      color: #ffffff;
+      text-align: center;
+      padding: 40px 20px;
+    }
+
+    .hero-banner h1 {
+      font-size: 32px;
+      font-weight: 800;
+      margin-bottom: 8px;
+    }
+
+    .hero-banner p {
+      font-size: 14px;
+      color: #cbd5e1;
+    }
+
+    .main-card {
+      max-width: 820px;
+      width: 100%;
+      margin: 35px auto;
+      background: #ffffff;
+      border-radius: 14px;
+      padding: 30px;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06);
+      flex: 1;
+    }
+
+    .section-box {
+      background: #f8fafc;
+      border: 1px solid #e2e8f0;
+      border-radius: 10px;
+      padding: 20px;
+      margin-bottom: 20px;
+    }
+
+    .section-title {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 15px;
+      font-weight: 700;
+      color: #1e3a8a;
+      border-bottom: 2px solid #2563eb;
+      padding-bottom: 6px;
+      margin-bottom: 16px;
+    }
+
+    .grid-2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+
+    label {
+      display: block;
+      font-size: 12px;
+      font-weight: 600;
+      color: #334155;
+      margin-bottom: 6px;
+    }
+
+    input[type="number"], input[type="text"], textarea {
+      width: 100%;
+      padding: 10px 12px;
+      border: 1px solid #cbd5e1;
+      border-radius: 6px;
+      font-size: 13px;
+      background: #ffffff;
+      outline: none;
+    }
+
+    input:focus, textarea:focus {
+      border-color: #2563eb;
+    }
+
+    .room-checks {
+      display: flex;
+      gap: 40px;
+      padding-top: 6px;
+    }
+
+    .room-checks label {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 13px;
+      cursor: pointer;
+    }
+
+    .btn-generate-wrap {
+      text-align: center;
+      margin: 24px 0 10px;
+    }
+
+    .btn-generate {
+      background: linear-gradient(90deg, #2563eb 0%, #0f2744 100%);
+      color: #ffffff;
+      border: none;
+      padding: 13px 36px;
+      border-radius: 25px;
+      font-size: 15px;
+      font-weight: 600;
+      cursor: pointer;
+      box-shadow: 0 4px 12px rgba(37, 99, 235, 0.25);
+    }
+
+    .loader {
+      display: none;
+      text-align: center;
+      padding: 20px;
+      font-weight: 600;
+      color: #1e3a8a;
+    }
+
+    .results-area {
+      display: none;
+      margin-top: 30px;
+    }
+
+    .results-title {
+      text-align: center;
+      font-size: 22px;
+      font-weight: 700;
+      color: #0f172a;
+      margin-bottom: 20px;
+    }
+
+    .summary-card {
+      border: 1px solid #e2e8f0;
+      border-radius: 10px;
+      overflow: hidden;
+      margin-bottom: 20px;
+    }
+
+    .summary-header {
+      background: linear-gradient(90deg, #1e407a 0%, #0b1e36 100%);
+      color: #ffffff;
+      padding: 12px 20px;
+      font-weight: 700;
+      font-size: 15px;
+    }
+
+    .summary-body {
+      background: #ffffff;
+      padding: 15px 20px;
+      display: flex;
+      justify-content: space-between;
+      font-size: 13px;
+      font-weight: 700;
+    }
+
+    .category-block {
+      background: #ffffff;
+      border: 1px solid #e2e8f0;
+      border-radius: 10px;
+      padding: 18px;
+      margin-bottom: 20px;
+    }
+
+    .category-block h3 {
+      font-size: 16px;
+      color: #0f172a;
+      margin-bottom: 4px;
+    }
+
+    .category-block .alloc {
+      font-size: 12px;
+      color: #64748b;
+      margin-bottom: 12px;
+    }
+
+    .item-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 12px;
+    }
+
+    .item-table th {
+      text-align: left;
+      padding: 8px;
+      border-bottom: 1px solid #e2e8f0;
+      color: #475569;
+    }
+
+    .item-table td {
+      padding: 12px 8px;
+      border-bottom: 1px solid #f1f5f9;
+      background: #f8fafc;
+      vertical-align: top;
+    }
+
+    .shop-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 4px;
+    }
+
+    .shop-btn {
+      display: inline-block;
+      padding: 3px 8px;
+      border: 1px solid #2563eb;
+      border-radius: 4px;
+      color: #2563eb;
+      text-decoration: none;
+      font-size: 11px;
+      background: #ffffff;
+    }
+
+    .shop-btn:hover {
+      background: #eff6ff;
+    }
+
+    .suggestions-card {
+      border: 1px solid #e2e8f0;
+      border-radius: 10px;
+      overflow: hidden;
+    }
+
+    .suggestions-header {
+      background: #2563eb;
+      color: #ffffff;
+      padding: 12px 20px;
+      font-weight: 700;
+      font-size: 15px;
+    }
+
+    .suggestions-list {
+      padding: 15px 20px;
+      background: #ffffff;
+    }
+
+    .suggestions-list p {
+      font-size: 13px;
+      color: #334155;
+      padding: 8px 0;
+      border-bottom: 1px solid #f1f5f9;
+    }
+
+    .suggestions-list p:last-child {
+      border-bottom: none;
+    }
+
+    footer {
+      background: #0b1e36;
+      color: #cbd5e1;
+      text-align: center;
+      padding: 18px;
+      font-size: 12px;
+      margin-top: auto;
+    }
+  </style>
+</head>
+<body>
+
+  <header class="navbar">
+    <a href="/dashboard" class="navbar-brand">📁 PocketSmart</a>
+    <div class="navbar-nav">
+      <a href="/dashboard">📈 Dashboard</a>
+      <a href="/home-planner" class="active">🏠 Home Budget</a>
+      <a href="/party-planner">🎉 Party Budget</a>
+      <a href="/jewelry-planner">💎 Jewelry Budget</a>
+      <a href="/history">🕒 History</a>
+      <form action="/logout" method="post" style="display:inline;">
+        <button type="submit" class="logout-btn">↪ Logout</button>
+      </form>
+    </div>
+  </header>
+
+  <section class="hero-banner">
+    <h1>Home Interior Budget Planner</h1>
+    <p>Create a customized budget plan for your dream home interior</p>
+  </section>
+
+  <main class="main-card">
+    <div class="section-box">
+      <div class="section-title">💲 Budget Details</div>
+      <label>Total Budget ($ / ₹)</label>
+      <input type="number" id="h_budget" value="5000">
+    </div>
+
+    <div class="section-box">
+      <div class="section-title">💡 Fixtures & Furniture</div>
+      <div class="grid-2">
+        <div>
+          <label>💡 Number of Lights/Fixtures</label>
+          <input type="number" id="num_lights" value="5">
+        </div>
+        <div>
+          <label>🌀 Number of Ceiling Fans</label>
+          <input type="number" id="num_fans" value="4">
+        </div>
+        <div>
+          <label>🛋 Number of Furniture Pieces</label>
+          <input type="number" id="num_furniture" value="2">
+        </div>
+        <div>
+          <label>🍽 Number of Dining Tables</label>
+          <input type="number" id="num_dining" value="1">
+        </div>
+      </div>
+    </div>
+
+    <div class="section-box">
+      <div class="section-title">🏠 Rooms to Include</div>
+      <div class="room-checks">
+        <label><input type="checkbox" id="room_living" checked> 🖥 Living Room</label>
+        <label><input type="checkbox" id="room_kitchen" checked> 🍳 Kitchen</label>
+        <label><input type="checkbox" id="room_bed"> 🛏 Bedroom</label>
+      </div>
+    </div>
+
+    <div class="section-box">
+      <div class="section-title">📋 Additional Information</div>
+      <label>Special Requirements or Preferences</label>
+      <textarea id="h_pref" rows="3" placeholder="Any specific requirements or preferences..."></textarea>
+    </div>
+
+    <div class="btn-generate-wrap">
+      <button class="btn-generate" onclick="generateHomePlan()">🧮 Generate Recommendations</button>
+    </div>
+
+    <div id="loader" class="loader">Generating your personalized interior budget plan...</div>
+
+    <div id="results-area" class="results-area">
+      <div class="results-title">Your Personalized Budget Plan</div>
+
+      <div class="summary-card">
+        <div class="summary-header">🕒 Budget Summary</div>
+        <div class="summary-body">
+          <span>Total Budget: <span id="sum-total" style="color:#2563eb;">$5000.00</span></span>
+          <span>Remaining Budget: <span id="sum-rem" style="color:#16a34a;">$500.00</span></span>
+        </div>
+      </div>
+
+      <div id="categories-container"></div>
+
+      <div class="suggestions-card">
+        <div class="suggestions-header">💡 Additional Suggestions</div>
+        <div class="suggestions-list" id="tips-container"></div>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    &copy; 2026 PocketSmart. All rights reserved.
+  </footer>
+
+  <script>
+    async function generateHomePlan() {
+      const budget = parseFloat(document.getElementById('h_budget').value || 5000);
+      const lights = parseInt(document.getElementById('num_lights').value || 5);
+      const fans = parseInt(document.getElementById('num_fans').value || 4);
+      const furniture = parseInt(document.getElementById('num_furniture').value || 2);
+      const dining = parseInt(document.getElementById('num_dining').value || 1);
+      const pref = document.getElementById('h_pref').value || 'Modern';
+
+      document.getElementById('loader').style.display = 'block';
+      document.getElementById('results-area').style.display = 'none';
+
+      try {
+        const res = await fetch('/generate-home', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            room_type: 'Living Room & Kitchen',
+            total_budget: budget,
+            preferences: pref,
+            num_lights: lights,
+            num_fans: fans,
+            num_furniture: furniture,
+            num_dining_tables: dining
+          })
+        });
+        const data = await res.json();
+        document.getElementById('loader').style.display = 'none';
+        document.getElementById('results-area').style.display = 'block';
+
+        const rem = data.remaining_budget !== undefined ? data.remaining_budget : (budget * 0.1);
+        document.getElementById('sum-total').innerText = '$' + budget.toFixed(2);
+        document.getElementById('sum-rem').innerText = '$' + parseFloat(rem).toFixed(2);
+
+        const aiItems = data.home_recommendations || [];
+        const container = document.getElementById('categories-container');
+
+        const shopBtns = (term) => {
+          const q = encodeURIComponent(term || 'home decor');
+          return `
+            <div class="shop-links">
+              <a class="shop-btn" href="https://www.amazon.in/s?k=${q}" target="_blank">Amazon</a>
+              <a class="shop-btn" href="https://www.flipkart.com/search?q=${q}" target="_blank">Flipkart</a>
+              <a class="shop-btn" href="https://www.ikea.com/in/en/search/?q=${q}" target="_blank">Ikea</a>
+              <a class="shop-btn" href="https://www.myntra.com/${q}" target="_blank">Myntra</a>
+              <a class="shop-btn" href="https://www.ajio.com/search/?text=${q}" target="_blank">Ajio</a>
+            </div>
+          `;
+        };
+
+        if (aiItems.length > 0) {
+          container.innerHTML = aiItems.map(item => `
+            <div class="category-block">
+              <h3>🛋 ${item.category || 'Interior Item'}</h3>
+              <div class="alloc">Allocation: $${item.estimated_price || 500}.00</div>
+              <table class="item-table">
+                <thead>
+                  <tr>
+                    <th>Item</th>
+                    <th>Description</th>
+                    <th>Price</th>
+                    <th>Quantity</th>
+                    <th>Shopping Links</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><strong>${item.item_name}</strong></td>
+                    <td>${item.search_terms || 'High quality functional item for home interior.'}</td>
+                    <td>$${item.estimated_price || 250}.00</td>
+                    <td>1</td>
+                    <td>${shopBtns(item.search_terms || item.item_name)}</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          `).join('');
+        } else {
+          container.innerHTML = `
+            <div class="category-block">
+              <h3>💡 Lighting</h3>
+              <div class="alloc">Allocation: $${(budget * 0.3).toFixed(2)}</div>
+              <table class="item-table">
+                <thead>
+                  <tr><th>Item</th><th>Description</th><th>Price</th><th>Quantity</th><th>Shopping Links</th></tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><strong>LED Bulb (Warm White)</strong></td>
+                    <td>Energy-efficient LED bulbs for general lighting.</td>
+                    <td>$100.00</td>
+                    <td>${lights}</td>
+                    <td>${shopBtns('LED Bulb Warm White')}</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="category-block">
+              <h3>🌀 Ceiling_fans</h3>
+              <div class="alloc">Allocation: $${(budget * 0.4).toFixed(2)}</div>
+              <table class="item-table">
+                <thead>
+                  <tr><th>Item</th><th>Description</th><th>Price</th><th>Quantity</th><th>Shopping Links</th></tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><strong>Havells Ceiling Fan</strong></td>
+                    <td>Basic, functional ceiling fan.</td>
+                    <td>$500.00</td>
+                    <td>${fans}</td>
+                    <td>${shopBtns('Havells Ceiling Fan')}</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="category-block">
+              <h3>🛋 Furniture</h3>
+              <div class="alloc">Allocation: $${(budget * 0.2).toFixed(2)}</div>
+              <table class="item-table">
+                <thead>
+                  <tr><th>Item</th><th>Description</th><th>Price</th><th>Quantity</th><th>Shopping Links</th></tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><strong>Plastic Chair</strong></td>
+                    <td>Stackable chairs for kitchen or living room.</td>
+                    <td>$250.00</td>
+                    <td>${furniture}</td>
+                    <td>${shopBtns('Stackable Chair')}</td>
+                  </tr>
+                  <tr>
+                    <td><strong>Small Wooden Table</strong></td>
+                    <td>Simple wooden table for dining or side table.</td>
+                    <td>$500.00</td>
+                    <td>${dining}</td>
+                    <td>${shopBtns('Wooden Dining Table')}</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          `;
+        }
+
+        const tips = (data.tips && data.tips.length > 0) ? data.tips : [
+          "Consider purchasing used furniture for further cost savings.",
+          "Look for sales and discounts on online marketplaces.",
+          "Prioritize essential items and postpone non-essential purchases."
+        ];
+        document.getElementById('tips-container').innerHTML = tips.map(t => `<p>🔵 ${t}</p>`).join('');
+      } catch (err) {
+        document.getElementById('loader').innerText = 'Error generating recommendations. Please try again.';
+      }
+    }
+  </script>
+
+</body>
+</html>
