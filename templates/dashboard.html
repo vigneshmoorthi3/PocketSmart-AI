@@ -13,29 +13,38 @@
     }
 
     body {
-      background-color: #eef2f6;
-      color: #1e293b;
+      background: radial-gradient(circle at 85% 15%, #0f274a 0%, #06111f 55%, #02060d 100%);
+      color: #f1f5f9;
       display: flex;
       flex-direction: column;
       min-height: 100vh;
     }
 
     .navbar {
-      background: #0b1e36;
-      padding: 15px 40px;
+      background: rgba(6, 17, 31, 0.85);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      padding: 16px 40px;
       display: flex;
       justify-content: space-between;
       align-items: center;
+      border-bottom: 1px solid rgba(56, 189, 248, 0.15);
+      position: sticky;
+      top: 0;
+      z-index: 100;
     }
 
     .navbar-brand {
-      font-size: 20px;
-      font-weight: 700;
-      color: #ffffff;
+      font-size: 21px;
+      font-weight: 800;
+      background: linear-gradient(135deg, #38bdf8 0%, #818cf8 50%, #c084fc 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
       text-decoration: none;
       display: flex;
       align-items: center;
-      gap: 8px;
+      gap: 10px;
+      letter-spacing: -0.4px;
     }
 
     .navbar-nav {
@@ -45,7 +54,7 @@
     }
 
     .navbar-nav a, .logout-btn {
-      color: #cbd5e1;
+      color: #94a3b8;
       text-decoration: none;
       font-size: 14px;
       font-weight: 500;
@@ -55,32 +64,41 @@
       display: inline-flex;
       align-items: center;
       gap: 6px;
-      transition: color 0.2s;
+      padding: 6px 12px;
+      border-radius: 8px;
+      transition: all 0.25s ease;
     }
 
     .navbar-nav a:hover, .logout-btn:hover {
-      color: #ffffff;
+      color: #38bdf8;
+      background: rgba(56, 189, 248, 0.08);
     }
 
     .hero-banner {
-      background: linear-gradient(180deg, #102a4e 0%, #1e407a 100%);
+      background: linear-gradient(180deg, rgba(15, 39, 74, 0.6) 0%, rgba(6, 17, 31, 0.95) 100%);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.06);
       color: #ffffff;
       text-align: center;
-      padding: 50px 20px;
+      padding: 55px 20px 45px;
+      position: relative;
     }
 
     .hero-banner h1 {
-      font-size: 36px;
+      font-size: 38px;
       font-weight: 800;
       margin-bottom: 12px;
+      letter-spacing: -0.5px;
+      background: linear-gradient(135deg, #ffffff 0%, #e2e8f0 60%, #94a3b8 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
     }
 
     .hero-banner p {
       font-size: 15px;
-      color: #cbd5e1;
+      color: #94a3b8;
       max-width: 600px;
       margin: 0 auto;
-      line-height: 1.5;
+      line-height: 1.6;
     }
 
     .container {
@@ -98,19 +116,29 @@
     }
 
     .planner-card {
-      background: #ffffff;
-      border-radius: 12px;
+      background: rgba(13, 27, 49, 0.65);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border-radius: 16px;
       overflow: hidden;
-      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.06);
+      box-shadow: 0 16px 36px rgba(0, 0, 0, 0.45);
       display: flex;
       flex-direction: column;
-      border: 1px solid #e2e8f0;
+      border: 1px solid rgba(56, 189, 248, 0.16);
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .planner-card:hover {
+      transform: translateY(-5px);
+      border-color: rgba(56, 189, 248, 0.45);
+      box-shadow: 0 20px 42px rgba(14, 165, 233, 0.15), 0 10px 20px rgba(0, 0, 0, 0.4);
     }
 
     .planner-card img {
       width: 100%;
       height: 195px;
       object-fit: cover;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
     }
 
     .planner-card-body {
@@ -124,7 +152,7 @@
     .planner-card h3 {
       font-size: 18px;
       font-weight: 700;
-      color: #1e3a8a;
+      color: #ffffff;
       margin-bottom: 10px;
       display: flex;
       align-items: center;
@@ -133,66 +161,76 @@
 
     .planner-card p {
       font-size: 13px;
-      color: #64748b;
+      color: #94a3b8;
       line-height: 1.6;
       margin-bottom: 24px;
     }
 
     .btn-card {
-      background: linear-gradient(90deg, #2563eb 0%, #0f2744 100%);
+      background: linear-gradient(135deg, #0284c7 0%, #2563eb 50%, #4f46e5 100%);
       color: #ffffff;
       text-align: center;
-      padding: 12px;
+      padding: 13px;
       border-radius: 25px;
       text-decoration: none;
       font-weight: 600;
       font-size: 14px;
       display: block;
-      transition: opacity 0.2s;
+      box-shadow: 0 4px 16px rgba(2, 132, 199, 0.35);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      transition: all 0.25s ease;
     }
 
     .btn-card:hover {
-      opacity: 0.92;
+      box-shadow: 0 6px 22px rgba(37, 99, 235, 0.55);
+      transform: translateY(-1px);
+      filter: brightness(1.08);
     }
 
     .history-btn-wrap {
       text-align: center;
-      margin: 35px 0;
+      margin: 38px 0;
     }
 
     .btn-orange-pill {
-      background: #f59e0b;
+      background: linear-gradient(135deg, #f59e0b 0%, #ea580c 100%);
       color: #ffffff;
-      padding: 12px 28px;
-      border-radius: 25px;
+      padding: 13px 30px;
+      border-radius: 28px;
       text-decoration: none;
-      font-weight: 600;
+      font-weight: 700;
       font-size: 14px;
       display: inline-flex;
       align-items: center;
       gap: 8px;
-      box-shadow: 0 4px 12px rgba(245, 158, 11, 0.3);
-      transition: background 0.2s;
+      box-shadow: 0 6px 20px rgba(245, 158, 11, 0.3);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      transition: all 0.25s ease;
     }
 
     .btn-orange-pill:hover {
-      background: #d97706;
+      box-shadow: 0 8px 26px rgba(234, 88, 12, 0.45);
+      transform: translateY(-2px);
+      filter: brightness(1.08);
     }
 
     .recent-box {
-      background: #ffffff;
-      border-radius: 12px;
+      background: rgba(13, 27, 49, 0.65);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border-radius: 16px;
       overflow: hidden;
-      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.06);
-      border: 1px solid #e2e8f0;
+      box-shadow: 0 16px 36px rgba(0, 0, 0, 0.45);
+      border: 1px solid rgba(56, 189, 248, 0.16);
       max-width: 900px;
       margin: 0 auto 30px;
     }
 
     .recent-header {
-      background: linear-gradient(90deg, #1e407a 0%, #0b1e36 100%);
+      background: linear-gradient(90deg, rgba(15, 39, 74, 0.9) 0%, rgba(6, 17, 31, 0.9) 100%);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
       color: #ffffff;
-      padding: 16px 24px;
+      padding: 18px 24px;
       font-size: 16px;
       font-weight: 700;
       display: flex;
@@ -209,7 +247,7 @@
       align-items: center;
       gap: 16px;
       padding: 16px 0;
-      border-bottom: 1px solid #f1f5f9;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.06);
     }
 
     .recent-item:last-child {
@@ -217,36 +255,39 @@
     }
 
     .recent-icon {
-      width: 40px;
-      height: 40px;
-      border-radius: 50%;
-      background: #1e3a8a;
-      color: #ffffff;
+      width: 44px;
+      height: 44px;
+      border-radius: 12px;
+      background: linear-gradient(135deg, rgba(56, 189, 248, 0.15) 0%, rgba(37, 99, 235, 0.25) 100%);
+      border: 1px solid rgba(56, 189, 248, 0.35);
+      color: #38bdf8;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 16px;
+      font-size: 18px;
       flex-shrink: 0;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
     }
 
     .recent-info h4 {
-      font-size: 14px;
+      font-size: 15px;
       font-weight: 700;
-      color: #0f172a;
+      color: #ffffff;
       margin-bottom: 4px;
     }
 
     .recent-info p {
-      font-size: 12px;
-      color: #64748b;
+      font-size: 13px;
+      color: #94a3b8;
     }
 
     footer {
-      background: #0b1e36;
-      color: #cbd5e1;
+      background: rgba(2, 6, 13, 0.95);
+      border-top: 1px solid rgba(255, 255, 255, 0.06);
+      color: #64748b;
       text-align: center;
-      padding: 20px;
-      font-size: 12px;
+      padding: 22px;
+      font-size: 13px;
       margin-top: auto;
     }
   </style>

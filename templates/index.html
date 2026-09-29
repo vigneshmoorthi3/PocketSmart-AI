@@ -6,11 +6,11 @@
   <title>PocketSmart - AI-Powered Budget Planning</title>
   <style>
     :root {
-      --bg-dark: #0b1e36;
-      --hero-bg: #112d4e;
-      --card-blue: #1e3a8a;
+      --bg-dark: #06111f;
+      --hero-bg: radial-gradient(circle at 85% 15%, #0f274a 0%, #06111f 55%, #02060d 100%);
+      --card-blue: #0284c7;
       --accent: #2563eb;
-      --text-muted: #64748b;
+      --text-muted: #94a3b8;
     }
 
     * {
@@ -21,8 +21,8 @@
     }
 
     body {
-      background-color: #f8fafc;
-      color: #1e293b;
+      background: radial-gradient(circle at 85% 15%, #0f274a 0%, #06111f 55%, #02060d 100%);
+      color: #f1f5f9;
       display: flex;
       flex-direction: column;
       min-height: 100vh;
@@ -30,21 +30,30 @@
 
     /* Top Navigation Bar */
     .navbar {
-      background: var(--bg-dark);
+      background: rgba(6, 17, 31, 0.85);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
       padding: 16px 40px;
       display: flex;
       justify-content: space-between;
       align-items: center;
+      border-bottom: 1px solid rgba(56, 189, 248, 0.15);
+      position: sticky;
+      top: 0;
+      z-index: 100;
     }
 
     .navbar-brand {
-      font-size: 20px;
-      font-weight: 700;
-      color: #ffffff;
+      font-size: 21px;
+      font-weight: 800;
+      background: linear-gradient(135deg, #38bdf8 0%, #818cf8 50%, #c084fc 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
       text-decoration: none;
       display: flex;
       align-items: center;
-      gap: 8px;
+      gap: 10px;
+      letter-spacing: -0.4px;
     }
 
     .navbar-nav {
@@ -54,52 +63,70 @@
     }
 
     .navbar-nav a {
-      color: #cbd5e1;
+      color: #94a3b8;
       text-decoration: none;
       font-size: 14px;
       font-weight: 500;
-      transition: color 0.2s;
+      transition: all 0.25s ease;
+      padding: 6px 12px;
+      border-radius: 8px;
     }
 
     .navbar-nav a:hover {
-      color: #ffffff;
+      color: #38bdf8;
+      background: rgba(56, 189, 248, 0.08);
     }
 
     .btn-nav-auth {
-      background: #2563eb;
+      background: linear-gradient(135deg, #0284c7 0%, #2563eb 50%, #4f46e5 100%) !important;
       color: #ffffff !important;
-      padding: 8px 18px;
-      border-radius: 6px;
+      padding: 8px 18px !important;
+      border-radius: 20px !important;
       font-weight: 600 !important;
+      box-shadow: 0 4px 14px rgba(2, 132, 199, 0.35);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      transition: all 0.25s ease !important;
+    }
+
+    .btn-nav-auth:hover {
+      box-shadow: 0 6px 20px rgba(37, 99, 235, 0.55);
+      transform: translateY(-1px);
+      filter: brightness(1.08);
     }
 
     /* Hero Section */
     .hero-section {
-      background: var(--hero-bg);
+      background: linear-gradient(180deg, rgba(15, 39, 74, 0.6) 0%, rgba(6, 17, 31, 0.95) 100%);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.06);
       color: white;
       text-align: center;
-      padding: 60px 20px 70px;
+      padding: 70px 20px 80px;
+      position: relative;
     }
 
     .hero-section h1 {
-      font-size: 38px;
+      font-size: 42px;
       font-weight: 800;
       margin-bottom: 12px;
       letter-spacing: -0.5px;
+      background: linear-gradient(135deg, #ffffff 0%, #e2e8f0 60%, #94a3b8 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
     }
 
     .hero-section h2 {
       font-size: 24px;
       font-weight: 600;
-      color: #f1f5f9;
+      color: #38bdf8;
       margin-bottom: 18px;
+      letter-spacing: -0.3px;
     }
 
     .hero-section p {
       font-size: 15px;
-      color: #cbd5e1;
+      color: #94a3b8;
       max-width: 680px;
-      margin: 0 auto 30px;
+      margin: 0 auto 32px;
       line-height: 1.6;
     }
 
@@ -110,28 +137,42 @@
     }
 
     .btn-hero-primary {
-      background: #2563eb;
+      background: linear-gradient(135deg, #0284c7 0%, #2563eb 50%, #4f46e5 100%);
       color: white;
-      padding: 11px 26px;
+      padding: 12px 30px;
       border-radius: 25px;
       font-size: 14px;
       font-weight: 600;
       text-decoration: none;
-      transition: background 0.2s;
+      box-shadow: 0 4px 16px rgba(2, 132, 199, 0.35);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      transition: all 0.25s ease;
     }
 
     .btn-hero-primary:hover {
-      background: #1d4ed8;
+      box-shadow: 0 6px 22px rgba(37, 99, 235, 0.55);
+      transform: translateY(-1px);
+      filter: brightness(1.08);
     }
 
     .btn-hero-secondary {
-      background: #ffffff;
-      color: #0f172a;
-      padding: 11px 26px;
+      background: rgba(13, 27, 49, 0.7);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      color: #ffffff;
+      padding: 12px 30px;
       border-radius: 25px;
       font-size: 14px;
       font-weight: 600;
       text-decoration: none;
+      border: 1px solid rgba(56, 189, 248, 0.25);
+      transition: all 0.25s ease;
+    }
+
+    .btn-hero-secondary:hover {
+      background: rgba(56, 189, 248, 0.12);
+      border-color: rgba(56, 189, 248, 0.5);
+      transform: translateY(-1px);
     }
 
     /* Features Section */
@@ -147,10 +188,11 @@
     }
 
     .section-header h2 {
-      font-size: 26px;
-      font-weight: 700;
-      color: #0f172a;
+      font-size: 28px;
+      font-weight: 800;
+      color: #ffffff;
       margin-bottom: 8px;
+      letter-spacing: -0.4px;
     }
 
     .section-header p {
@@ -165,23 +207,33 @@
     }
 
     .planner-card {
-      background: #ffffff;
-      border-radius: 12px;
+      background: rgba(13, 27, 49, 0.65);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border-radius: 16px;
       overflow: hidden;
-      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06);
-      border: 1px solid #e2e8f0;
+      box-shadow: 0 16px 36px rgba(0, 0, 0, 0.45);
+      border: 1px solid rgba(56, 189, 248, 0.16);
       display: flex;
       flex-direction: column;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .planner-card:hover {
+      transform: translateY(-5px);
+      border-color: rgba(56, 189, 248, 0.45);
+      box-shadow: 0 20px 42px rgba(14, 165, 233, 0.15), 0 10px 20px rgba(0, 0, 0, 0.4);
     }
 
     .planner-card img {
       width: 100%;
       height: 190px;
       object-fit: cover;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
     }
 
     .planner-card-body {
-      padding: 22px;
+      padding: 24px;
       flex: 1;
       display: flex;
       flex-direction: column;
@@ -190,9 +242,9 @@
     }
 
     .planner-card h3 {
-      font-size: 17px;
+      font-size: 18px;
       font-weight: 700;
-      color: #0f172a;
+      color: #ffffff;
       margin-bottom: 12px;
     }
 
@@ -204,27 +256,33 @@
     }
 
     .btn-card-action {
-      background: #1e3a8a;
+      background: linear-gradient(135deg, #0284c7 0%, #2563eb 50%, #4f46e5 100%);
       color: #ffffff;
-      padding: 10px;
-      border-radius: 20px;
+      padding: 12px;
+      border-radius: 25px;
       font-size: 13px;
       font-weight: 600;
       text-decoration: none;
       display: block;
-      transition: background 0.2s;
+      box-shadow: 0 4px 16px rgba(2, 132, 199, 0.35);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      transition: all 0.25s ease;
     }
 
     .btn-card-action:hover {
-      background: #0f2744;
+      box-shadow: 0 6px 22px rgba(37, 99, 235, 0.55);
+      transform: translateY(-1px);
+      filter: brightness(1.08);
     }
 
     /* Testimonials Section */
     .testimonials-section {
-      background: #ffffff;
+      background: rgba(6, 17, 31, 0.7);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
       padding: 70px 20px;
-      border-top: 1px solid #e2e8f0;
-      border-bottom: 1px solid #e2e8f0;
+      border-top: 1px solid rgba(56, 189, 248, 0.15);
+      border-bottom: 1px solid rgba(56, 189, 248, 0.15);
     }
 
     .testimonials-grid {
@@ -236,25 +294,26 @@
     }
 
     .testimonial-card {
-      background: #f8fafc;
-      border: 1px solid #e2e8f0;
-      border-radius: 12px;
+      background: rgba(13, 27, 49, 0.65);
+      border: 1px solid rgba(56, 189, 248, 0.16);
+      border-radius: 14px;
       padding: 24px;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.35);
     }
 
     .testimonial-card p {
       font-size: 13px;
-      color: #334155;
+      color: #cbd5e1;
       line-height: 1.6;
       margin-bottom: 18px;
     }
 
     .user-profile strong {
       font-size: 14px;
-      color: #0f172a;
+      color: #38bdf8;
     }
 
     .user-profile small {
@@ -264,21 +323,26 @@
 
     /* Bottom CTA Banner */
     .cta-banner {
-      background: var(--hero-bg);
+      background: linear-gradient(180deg, rgba(15, 39, 74, 0.7) 0%, rgba(6, 17, 31, 0.95) 100%);
       color: white;
       text-align: center;
-      padding: 55px 20px;
+      padding: 60px 20px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.06);
     }
 
     .cta-banner h2 {
-      font-size: 26px;
+      font-size: 28px;
       font-weight: 700;
       margin-bottom: 10px;
+      letter-spacing: -0.4px;
+      background: linear-gradient(135deg, #ffffff 0%, #cbd5e1 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
     }
 
     .cta-banner p {
       font-size: 14px;
-      color: #cbd5e1;
+      color: #94a3b8;
       margin-bottom: 24px;
     }
 
@@ -289,9 +353,10 @@
 
     /* Footer */
     footer {
-      background: var(--bg-dark);
-      color: #94a3b8;
+      background: rgba(2, 6, 13, 0.95);
+      color: #64748b;
       padding: 45px 30px 20px;
+      border-top: 1px solid rgba(255, 255, 255, 0.06);
     }
 
     .footer-grid {
@@ -312,19 +377,22 @@
     .footer-grid p {
       margin-bottom: 8px;
       cursor: pointer;
+      color: #94a3b8;
+      transition: color 0.2s ease;
     }
 
     .footer-grid p:hover {
-      color: #ffffff;
+      color: #38bdf8;
     }
 
     .footer-bottom {
       max-width: 1050px;
       margin: 30px auto 0;
       padding-top: 18px;
-      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      border-top: 1px solid rgba(255, 255, 255, 0.06);
       text-align: center;
       font-size: 12px;
+      color: #64748b;
     }
   </style>
 </head>

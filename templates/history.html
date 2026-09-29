@@ -13,26 +13,35 @@
     }
 
     body {
-      background-color: #f1f5f9;
-      color: #1e293b;
+      background: radial-gradient(circle at 85% 15%, #0f274a 0%, #06111f 55%, #02060d 100%);
+      color: #f1f5f9;
       display: flex;
       flex-direction: column;
       min-height: 100vh;
     }
 
     .navbar {
-      background: #0b1e36;
-      padding: 15px 40px;
+      background: rgba(6, 17, 31, 0.85);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      padding: 16px 40px;
       display: flex;
       justify-content: space-between;
       align-items: center;
+      border-bottom: 1px solid rgba(56, 189, 248, 0.15);
+      position: sticky;
+      top: 0;
+      z-index: 100;
     }
 
     .navbar-brand {
-      font-size: 20px;
-      font-weight: 700;
-      color: #ffffff;
+      font-size: 21px;
+      font-weight: 800;
+      background: linear-gradient(135deg, #38bdf8 0%, #818cf8 50%, #c084fc 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
       text-decoration: none;
+      letter-spacing: -0.4px;
     }
 
     .navbar-nav {
@@ -42,31 +51,51 @@
     }
 
     .navbar-nav a, .logout-btn {
-      color: #cbd5e1;
+      color: #94a3b8;
       text-decoration: none;
       font-size: 14px;
       font-weight: 500;
       background: none;
       border: none;
       cursor: pointer;
+      padding: 6px 12px;
+      border-radius: 8px;
+      transition: all 0.25s ease;
+    }
+
+    .navbar-nav a:hover, .logout-btn:hover {
+      color: #38bdf8;
+      background: rgba(56, 189, 248, 0.08);
     }
 
     .navbar-nav a.active {
-      color: #f59e0b;
+      color: #38bdf8;
+      background: rgba(56, 189, 248, 0.12);
+      border: 1px solid rgba(56, 189, 248, 0.25);
       font-weight: 600;
     }
 
     .hero-banner {
-      background: linear-gradient(180deg, #102a4e 0%, #1e407a 100%);
+      background: linear-gradient(180deg, rgba(15, 39, 74, 0.6) 0%, rgba(6, 17, 31, 0.95) 100%);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.06);
       color: #ffffff;
       text-align: center;
-      padding: 40px 20px;
+      padding: 50px 20px 40px;
     }
 
     .hero-banner h1 {
-      font-size: 32px;
+      font-size: 36px;
       font-weight: 800;
       margin-bottom: 8px;
+      letter-spacing: -0.5px;
+      background: linear-gradient(135deg, #ffffff 0%, #e2e8f0 60%, #94a3b8 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .hero-banner p {
+      font-size: 14px;
+      color: #94a3b8;
     }
 
     .container {
@@ -78,62 +107,84 @@
     }
 
     .history-card {
-      background: #ffffff;
-      border: 1px solid #e2e8f0;
-      border-radius: 12px;
-      padding: 20px 24px;
-      margin-bottom: 16px;
+      background: rgba(13, 27, 49, 0.65);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border: 1px solid rgba(56, 189, 248, 0.16);
+      border-radius: 14px;
+      padding: 22px 26px;
+      margin-bottom: 18px;
       display: flex;
       justify-content: space-between;
       align-items: center;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04);
+      box-shadow: 0 16px 36px rgba(0, 0, 0, 0.45);
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .history-card:hover {
+      transform: translateY(-3px);
+      border-color: rgba(56, 189, 248, 0.4);
+      box-shadow: 0 20px 40px rgba(14, 165, 233, 0.15), 0 10px 20px rgba(0, 0, 0, 0.4);
     }
 
     .history-left {
       display: flex;
       align-items: center;
-      gap: 16px;
+      gap: 18px;
     }
 
     .h-icon {
-      width: 44px;
-      height: 44px;
-      border-radius: 50%;
-      background: #1e3a8a;
-      color: #ffffff;
+      width: 48px;
+      height: 48px;
+      border-radius: 12px;
+      background: linear-gradient(135deg, rgba(56, 189, 248, 0.15) 0%, rgba(37, 99, 235, 0.25) 100%);
+      border: 1px solid rgba(56, 189, 248, 0.35);
+      color: #38bdf8;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 18px;
+      font-size: 20px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
     }
 
     .h-meta h3 {
       font-size: 16px;
-      color: #0f172a;
+      font-weight: 700;
+      color: #ffffff;
       margin-bottom: 4px;
     }
 
     .h-meta p {
-      font-size: 12px;
-      color: #64748b;
+      font-size: 13px;
+      color: #94a3b8;
     }
 
     .btn-view {
-      background: #2563eb;
+      background: linear-gradient(135deg, #0284c7 0%, #2563eb 50%, #4f46e5 100%);
       color: #ffffff;
-      padding: 8px 16px;
+      padding: 10px 20px;
       border-radius: 20px;
-      font-size: 12px;
+      font-size: 13px;
       font-weight: 600;
       text-decoration: none;
+      box-shadow: 0 4px 14px rgba(2, 132, 199, 0.35);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      transition: all 0.25s ease;
+    }
+
+    .btn-view:hover {
+      box-shadow: 0 6px 20px rgba(37, 99, 235, 0.55);
+      transform: translateY(-1px);
+      filter: brightness(1.08);
     }
 
     footer {
-      background: #0b1e36;
-      color: #cbd5e1;
+      background: rgba(2, 6, 13, 0.95);
+      border-top: 1px solid rgba(255, 255, 255, 0.06);
+      color: #64748b;
       text-align: center;
-      padding: 18px;
-      font-size: 12px;
+      padding: 22px;
+      font-size: 13px;
       margin-top: auto;
     }
   </style>
@@ -160,7 +211,7 @@
   </section>
 
   <main class="container" id="history-container">
-    <p style="text-align:center; color:#64748b;">Loading your past budget plans...</p>
+    <p style="text-align:center; color:#94a3b8;">Loading your past budget plans...</p>
   </main>
 
   <footer>
@@ -208,7 +259,7 @@
           `;
         }).join('');
       } catch (e) {
-        container.innerHTML = '<p style="text-align:center; color:#b91c1c;">Failed to load history.</p>';
+        container.innerHTML = '<p style="text-align:center; color:#f87171;">Failed to load history.</p>';
       }
     }
     fetchHistory();

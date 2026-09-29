@@ -13,19 +13,22 @@
     }
 
     body {
-      background: linear-gradient(180deg, #0b1e36 0%, #112d4e 50%, #1e3a8a 100%);
+      background: radial-gradient(circle at 85% 15%, #0f274a 0%, #06111f 55%, #02060d 100%);
       min-height: 100vh;
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
       padding: 20px;
+      color: #f1f5f9;
     }
 
     .brand-title {
       font-size: 36px;
       font-weight: 800;
-      color: #ffffff;
+      background: linear-gradient(135deg, #38bdf8 0%, #818cf8 50%, #c084fc 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
       margin-bottom: 6px;
       letter-spacing: -0.5px;
       text-align: center;
@@ -34,33 +37,35 @@
     .brand-subtitle {
       font-size: 15px;
       font-weight: 500;
-      color: #cbd5e1;
+      color: #94a3b8;
       margin-bottom: 25px;
       text-align: center;
     }
 
     .auth-card {
-      background: #ffffff;
+      background: rgba(13, 27, 49, 0.65);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
       width: 100%;
       max-width: 440px;
       border-radius: 16px;
       padding: 35px 32px;
-      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.25);
-      border: 1px solid rgba(255, 255, 255, 0.2);
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.45);
+      border: 1px solid rgba(56, 189, 248, 0.16);
       text-align: center;
     }
 
     .auth-heading {
       font-size: 24px;
       font-weight: 700;
-      color: #1e293b;
+      color: #ffffff;
       margin-bottom: 20px;
     }
 
     .alert-success {
-      background-color: #dcfce7;
-      border: 1px solid #86efac;
-      color: #15803d;
+      background-color: rgba(34, 197, 94, 0.15);
+      border: 1px solid rgba(74, 222, 128, 0.35);
+      color: #86efac;
       padding: 10px 14px;
       border-radius: 8px;
       font-size: 13px;
@@ -73,9 +78,9 @@
     }
 
     .alert-error {
-      background-color: #fee2e2;
-      border: 1px solid #f87171;
-      color: #b91c1c;
+      background-color: rgba(239, 68, 68, 0.15);
+      border: 1px solid rgba(248, 113, 113, 0.35);
+      color: #fca5a5;
       padding: 10px 14px;
       border-radius: 8px;
       font-size: 13px;
@@ -96,7 +101,7 @@
       display: block;
       font-size: 14px;
       font-weight: 600;
-      color: #1e293b;
+      color: #94a3b8;
       margin-bottom: 8px;
     }
 
@@ -116,23 +121,25 @@
     .input-wrapper input {
       width: 100%;
       padding: 12px 14px 12px 42px;
-      border: 1px solid #cbd5e1;
+      border: 1px solid rgba(56, 189, 248, 0.2);
       border-radius: 8px;
       font-size: 14px;
+      background: rgba(6, 17, 31, 0.8);
+      color: #f1f5f9;
       outline: none;
       transition: border-color 0.2s, box-shadow 0.2s;
     }
 
     .input-wrapper input:focus {
-      border-color: #2563eb;
-      box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15);
+      border-color: #38bdf8;
+      box-shadow: 0 0 0 3px rgba(56, 189, 248, 0.2);
     }
 
     .forgot-link {
       display: block;
       text-align: right;
       font-size: 13px;
-      color: #2563eb;
+      color: #38bdf8;
       text-decoration: none;
       margin-top: 6px;
       margin-bottom: 22px;
@@ -140,13 +147,14 @@
     }
     .forgot-link:hover {
       text-decoration: underline;
+      color: #7dd3fc;
     }
 
     .btn-submit {
       width: 100%;
-      background: #1e3a8a;
+      background: linear-gradient(135deg, #0284c7 0%, #2563eb 50%, #4f46e5 100%);
       color: #ffffff;
-      border: none;
+      border: 1px solid rgba(255, 255, 255, 0.12);
       padding: 14px;
       border-radius: 25px;
       font-size: 16px;
@@ -156,23 +164,29 @@
       justify-content: center;
       align-items: center;
       gap: 8px;
-      transition: background 0.2s;
+      box-shadow: 0 4px 16px rgba(2, 132, 199, 0.35);
+      transition: all 0.25s ease;
     }
 
     .btn-submit:hover {
-      background: #172554;
+      box-shadow: 0 6px 22px rgba(37, 99, 235, 0.55);
+      transform: translateY(-1px);
+      filter: brightness(1.08);
     }
 
     .bottom-switch {
       margin-top: 22px;
       font-size: 14px;
-      color: #475569;
+      color: #94a3b8;
     }
 
     .bottom-switch a {
-      color: #2563eb;
+      color: #38bdf8;
       text-decoration: none;
       font-weight: 600;
+    }
+    .bottom-switch a:hover {
+      text-decoration: underline;
     }
   </style>
 </head>
